@@ -15,7 +15,6 @@ const DB = process.env.DATABASE_URL.replace(
 describe("Restuarant Endpoints", () => {
   // Connecting to database before each test
   beforeEach(async () => {
-    jest.setTimeout(30000);
     await mongoose.connect(DB);
   });
 
@@ -34,8 +33,15 @@ describe("Restuarant Endpoints", () => {
   test("should create a restuarant and return 201", async () => {
     const response = await api
       .post("/api/v1/newRestuarant")
-      .send(newRestuarant);
+      .field("image", "public/img/IMG_7643.JPG-1686216921130-110721361");
     expect(response.statusCode).toBe(201);
+  });
+
+  test("should fail to create a restuarant and return 400", async () => {
+    const response = await api
+      .post("/api/v1/newRestuarant")
+      .attach("image", "public/img/IMG_7643.JPG-1686216921130-110721361");
+    expect(response.statusCode).toBe(400);
   });
 
   test("should update a restuarant and return 200", async () => {

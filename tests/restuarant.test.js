@@ -33,7 +33,7 @@ describe("Restuarant Endpoints", () => {
   test("should create a restuarant and return 201", async () => {
     const response = await api
       .post("/api/v1/newRestuarant")
-      .field("image", "public/img/IMG_7643.JPG-1686216921130-110721361");
+      .attach("image", "public/img/IMG_7643.JPG-1686216921130-110721361");
     expect(response.statusCode).toBe(201);
   });
 

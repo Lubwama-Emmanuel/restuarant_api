@@ -40,6 +40,7 @@ exports.createRestuarant = catchAsync(async (req, res) => {
     location: req.body.location,
   };
 
+  // checking if image is uploaded
   if (req.file) {
     body["image"] = req.file.path;
   }
